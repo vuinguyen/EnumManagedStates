@@ -8,64 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
-
-    //@State var currentState
-    // enum for Events
-    // enum for States
-
     @ObservedObject var settings = AppSettings()
-    
-    // changeState takes in some event
-    func changeState() {
-        switch self.settings.state {
-        case DataLoadingState.started:
-            self.settings.state = DataLoadingState.offline
-
-        case DataLoadingState.offline:
-            self.settings.state = DataLoadingState.online
-        case DataLoadingState.online:
-            self.settings.state = DataLoadingState.loading
-        case DataLoadingState.loading:
-            self.settings.state = DataLoadingState.error
-        case DataLoadingState.error:
-            self.settings.state = DataLoadingState.success
-        case DataLoadingState.success:
-            self.settings.state = DataLoadingState.started
-        }
-    }
-
+    @State var internetOffline = false
+    @State var errorLoading = false
 
     var body: some View {
         VStack {
-/*
+            Toggle(isOn: $internetOffline, label: {
+                Text("Internet Offline")
+            }).padding()
+            Toggle(isOn: $errorLoading, label: {
+                Text("Error Loading")
+            }).padding()
             Button(action: {
-                //
-            }) {
-                Text("Check Connectivity")
-            }
-            Button(action: {}) {
-                Text("Go Offline")
-            }
-            Button(action: {}) {
-                Text("Go Online")
-            }
-            Button(action: {}) {
-                Text("Download")
-            }
-            Button(action: {}) {
-                Text("Display")
-            }
- */
-            Button(action: {
-                changeState()
+                settings.changeState(internetOffline: internetOffline, errorLoading: errorLoading)
             }, label: {
-                Text("Change State")
+                Text("Next Step")
             })
-            Text("Current State:")
+            Text("State:")
                 .padding()
                 .font(.largeTitle)
             Text("\(self.settings.state.rawValue)")
                 .padding()
+                .font(.title)
         }
     }
 }
