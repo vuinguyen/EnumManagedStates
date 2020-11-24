@@ -10,9 +10,9 @@ import SwiftUI
 import Combine
 
 enum DataLoadingState: String {
-    case started
+    case started    // maybe initial
     case offline
-    case online
+    case online // ? necessary
     case loading
     case error
     case success
@@ -57,5 +57,11 @@ class AppSettings: ObservableObject {
         case DataLoadingState.success:
             state = DataLoadingState.started
         }
+    }
+}
+
+struct AppSettings_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

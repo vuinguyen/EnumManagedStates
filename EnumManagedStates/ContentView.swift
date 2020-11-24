@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var settings = AppSettings()
-    @State var internetOffline = false
+    
+    // can we make these State variables Observed / Environment?
+    // internet offline is a confusing label - double negative?
+    @State var internetOffline = false 
     @State var errorLoading = false
 
     var body: some View {
@@ -20,17 +23,24 @@ struct ContentView: View {
             Toggle(isOn: $errorLoading, label: {
                 Text("Error Loading")
             }).padding()
-            Button(action: {
-                settings.changeState(internetOffline: internetOffline, errorLoading: errorLoading)
-            }, label: {
-                Text("Next Step")
-            })
-            Text("State:")
+            
+            Text("Input State:")
                 .padding()
                 .font(.largeTitle)
             Text("\(self.settings.state.rawValue)")
+                .foregroundColor(Color.green)
                 .padding()
                 .font(.title)
+            Button(action: {
+                settings.changeState(internetOffline: internetOffline, errorLoading: errorLoading)
+            }, label: {
+                Text("Evaluate State")
+            })
+            /// Put output state display here
+            
+            // Label : Input state
+            // Label : Output state
+                
         }
     }
 }
