@@ -13,7 +13,8 @@
 		524784AF2561CC69008E2560 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 524784AE2561CC69008E2560 /* Preview Assets.xcassets */; };
 		524784BA2561CC69008E2560 /* EnumManagedStatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524784B92561CC69008E2560 /* EnumManagedStatesTests.swift */; };
 		524784C52561CC69008E2560 /* EnumManagedStatesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524784C42561CC69008E2560 /* EnumManagedStatesUITests.swift */; };
-		52890D39256AE1DA00ED6B61 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52890D38256AE1DA00ED6B61 /* AppSettings.swift */; };
+		52890D39256AE1DA00ED6B61 /* EnvironmentSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52890D38256AE1DA00ED6B61 /* EnvironmentSettings.swift */; };
+		52D00EF02571AB52009FA09B /* EnvironmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D00EEF2571AB52009FA09B /* EnvironmentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +47,8 @@
 		524784C02561CC69008E2560 /* EnumManagedStatesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnumManagedStatesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		524784C42561CC69008E2560 /* EnumManagedStatesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumManagedStatesUITests.swift; sourceTree = "<group>"; };
 		524784C62561CC69008E2560 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		52890D38256AE1DA00ED6B61 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		52890D38256AE1DA00ED6B61 /* EnvironmentSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentSettings.swift; sourceTree = "<group>"; };
+		52D00EEF2571AB52009FA09B /* EnvironmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +104,8 @@
 				524784AB2561CC69008E2560 /* Assets.xcassets */,
 				524784B02561CC69008E2560 /* Info.plist */,
 				524784AD2561CC69008E2560 /* Preview Content */,
-				52890D38256AE1DA00ED6B61 /* AppSettings.swift */,
+				52890D38256AE1DA00ED6B61 /* EnvironmentSettings.swift */,
+				52D00EEF2571AB52009FA09B /* EnvironmentView.swift */,
 			);
 			path = EnumManagedStates;
 			sourceTree = "<group>";
@@ -262,8 +265,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52D00EF02571AB52009FA09B /* EnvironmentView.swift in Sources */,
 				524784AA2561CC69008E2560 /* ContentView.swift in Sources */,
-				52890D39256AE1DA00ED6B61 /* AppSettings.swift in Sources */,
+				52890D39256AE1DA00ED6B61 /* EnvironmentSettings.swift in Sources */,
 				524784A82561CC69008E2560 /* EnumManagedStatesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

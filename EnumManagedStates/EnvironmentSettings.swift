@@ -18,11 +18,13 @@ enum DataLoadingState: String {
     case success
 }
 
-class AppSettings: ObservableObject {
+class EnvironmentSettings: ObservableObject {
 
     @Published var state: DataLoadingState = .started
+    @Published var internetOffline = false
+    @Published var errorLoading = false
 
-    func changeState(internetOffline: Bool, errorLoading: Bool) {
+    func changeState() {
         switch state {
         case DataLoadingState.started:
             if internetOffline {
