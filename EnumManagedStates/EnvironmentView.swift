@@ -14,11 +14,11 @@ struct EnvironmentView: View {
 
         VStack {
 
-            Toggle(isOn: self.$settings.internetOffline, label: {
-                Text("Internet Offline")
+            Toggle(isOn: self.$settings.internetConnected, label: {
+                Text("Internet Connected")
             }).padding()
-            Toggle(isOn: self.$settings.errorLoading, label: {
-                Text("Error Loading")
+            Toggle(isOn: self.$settings.internetCallSucceeded, label: {
+                Text("API Call Succeeded")
             }).padding()
            // Text("Hello World!" + "\(self.$settings.errorLoading)")
         }

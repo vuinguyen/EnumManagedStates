@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 enum DataLoadingState: String {
-    case started    // maybe initial
+    case initial    // maybe initial
     case offline
     case online // ? necessary
     case loading
@@ -20,36 +20,37 @@ enum DataLoadingState: String {
 
 class EnvironmentSettings: ObservableObject {
 
-    @Published var state: DataLoadingState = .started
-    @Published var internetOffline = false
-    @Published var errorLoading = false
+    @Published var state: DataLoadingState = .initial
+    @Published var inputState: DataLoadingState = .initial
+    @Published var internetConnected = true
+    @Published var internetCallSucceeded = true
 
     func changeState() {
         switch state {
-        case DataLoadingState.started:
-            if internetOffline {
+        case DataLoadingState.initial:
+            if internetConnected == false {
                 state = DataLoadingState.offline
             } else {
                 state = DataLoadingState.online
             }
         case DataLoadingState.offline:
-            if internetOffline == false {
+            if internetConnected {
                 state = DataLoadingState.online
             } else {
                 state = DataLoadingState.offline
             }
         case DataLoadingState.online:
-            if internetOffline {
+            if internetConnected == false {
                 state = DataLoadingState.offline
             } else {
                 state = DataLoadingState.loading
             }
         case DataLoadingState.loading:
-            if internetOffline {
+            if internetConnected == false {
                 state = DataLoadingState.offline
                 return
             }
-            if errorLoading {
+            if internetCallSucceeded == false {
                 state = DataLoadingState.error
             } else {
                 state = DataLoadingState.success
@@ -57,7 +58,7 @@ class EnvironmentSettings: ObservableObject {
         case DataLoadingState.error:
             state = DataLoadingState.loading
         case DataLoadingState.success:
-            state = DataLoadingState.started
+            state = DataLoadingState.initial
         }
     }
 }
