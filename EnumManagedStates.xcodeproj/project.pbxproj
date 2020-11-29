@@ -15,6 +15,7 @@
 		524784C52561CC69008E2560 /* EnumManagedStatesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524784C42561CC69008E2560 /* EnumManagedStatesUITests.swift */; };
 		52890D39256AE1DA00ED6B61 /* EnvironmentSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52890D38256AE1DA00ED6B61 /* EnvironmentSettings.swift */; };
 		52D00EF02571AB52009FA09B /* EnvironmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D00EEF2571AB52009FA09B /* EnvironmentView.swift */; };
+		52D00F0A25732A75009FA09B /* MyNetworkClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D00F0925732A75009FA09B /* MyNetworkClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		524784C62561CC69008E2560 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52890D38256AE1DA00ED6B61 /* EnvironmentSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentSettings.swift; sourceTree = "<group>"; };
 		52D00EEF2571AB52009FA09B /* EnvironmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentView.swift; sourceTree = "<group>"; };
+		52D00F0925732A75009FA09B /* MyNetworkClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyNetworkClass.swift; path = ../../backupJakesWay/EnumManagedStates/EnumManagedStates/MyNetworkClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		524784A62561CC69008E2560 /* EnumManagedStates */ = {
 			isa = PBXGroup;
 			children = (
+				52D00F0925732A75009FA09B /* MyNetworkClass.swift */,
 				524784A72561CC69008E2560 /* EnumManagedStatesApp.swift */,
 				524784A92561CC69008E2560 /* ContentView.swift */,
 				524784AB2561CC69008E2560 /* Assets.xcassets */,
@@ -265,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52D00F0A25732A75009FA09B /* MyNetworkClass.swift in Sources */,
 				52D00EF02571AB52009FA09B /* EnvironmentView.swift in Sources */,
 				524784AA2561CC69008E2560 /* ContentView.swift in Sources */,
 				52890D39256AE1DA00ED6B61 /* EnvironmentSettings.swift in Sources */,

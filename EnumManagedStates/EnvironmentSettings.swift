@@ -19,11 +19,12 @@ enum DataLoadingState: String {
 }
 
 class EnvironmentSettings: ObservableObject {
-
     @Published var state: DataLoadingState = .initial
     @Published var inputState: DataLoadingState = .initial
     @Published var internetConnected = true
     @Published var internetCallSucceeded = true
+
+    let network = MyNetworkClass.shared
 
     func changeState() {
         switch state {
@@ -61,9 +62,37 @@ class EnvironmentSettings: ObservableObject {
             state = DataLoadingState.initial
         }
     }
+
+    func startOver() {
+        state = .initial
+    }
+
+    func makeNetworkCall() {
+        state = .loading
+
+        network.getTheThing(internetConnected: internetConnected, internetCallSucceeded: internetCallSucceeded) { [weak self] (result) in
+            self?.handleResult(result)
+        }
+
+    }
+
+    private func handleResult(_ result: MyNetworkClass.ThingResult) {
+        switch result {
+        case .success:
+            state = DataLoadingState.success
+        case .failure(let error):
+            if error.domain == NSURLErrorDomain,
+               error.code == NSURLErrorNotConnectedToInternet {
+                state = .offline
+            }
+            else {
+                state = .error
+            }
+        }
+    }
 }
 
-struct AppSettings_Previews: PreviewProvider {
+struct EnvironmentSettings_Previews: PreviewProvider {
     static var previews: some View {
         /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }

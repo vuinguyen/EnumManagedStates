@@ -9,14 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var settings : EnvironmentSettings
-    
-    // can we make these State variables Observed / Environment?
-    // internet offline is a confusing label - double negative?
-    //@State var internetOffline = false
-   // @State var errorLoading = false
 
     var body: some View {
+
         VStack {
+
+            Button(action: {
+                self.settings.startOver()
+            }) {
+                Text("Start Over")
+            }
             EnvironmentView()
             Text("Input State:")
                 .padding()
@@ -25,11 +27,18 @@ struct ContentView: View {
                 .foregroundColor(Color.green)
                 .padding()
                 .font(.title)
+            /*
             Button(action: {
                 settings.changeState()
             }, label: {
                 Text("Evaluate State")
             })
+ */
+            Button(action: {
+                self.settings.makeNetworkCall()
+            }) {
+                Text("Download Data")
+            }
             /// Put output state display here
             
             // Label : Input state
