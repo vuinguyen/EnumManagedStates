@@ -9,14 +9,37 @@ import Foundation
 import SwiftUI
 import Combine
 
-enum DataLoadingState: String {
+protocol printEnum {
+    var description: String { get }
+}
+
+enum DataLoadingState: printEnum {
+
+    var description: String {
+        switch self {
+        case .initial:
+            return "Initial"
+        case .offline:
+            return "Offline"
+        case .loading:
+            return "Loading"
+        case .error:
+            return "Error"
+        case .success(let thing):
+            return "Success: \(thing.name)"
+        }
+    }
+
     case initial    
     case offline
     //case online // ? necessary
     case loading
     case error
-    case success
+    //case success
+    case success(TheThing)
 }
+
+
 
 class EnvironmentSettings: ObservableObject {
     @Published var state: DataLoadingState = .initial
@@ -55,7 +78,7 @@ class EnvironmentSettings: ObservableObject {
             if internetCallSucceeded == false {
                 state = DataLoadingState.error
             } else {
-                state = DataLoadingState.success
+ //               state = DataLoadingState.success
             }
         case DataLoadingState.error:
             state = DataLoadingState.loading
@@ -79,8 +102,9 @@ class EnvironmentSettings: ObservableObject {
 
     private func handleResult(_ result: MyNetworkClass.ThingResult) {
         switch result {
-        case .success:
-            state = DataLoadingState.success
+        case .success(let thing):
+            //state = DataLoadingState.success
+            state = .success(thing)
         case .failure(let error):
             if error.domain == NSURLErrorDomain,
                error.code == NSURLErrorNotConnectedToInternet {
