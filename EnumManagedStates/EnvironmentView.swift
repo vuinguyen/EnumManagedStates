@@ -11,16 +11,13 @@ struct EnvironmentView: View {
     @EnvironmentObject var settings: EnvironmentSettings
 
     var body: some View {
-
         VStack {
-
             Toggle(isOn: self.$settings.internetConnected, label: {
                 Text("Internet Connected")
             }).padding()
             Toggle(isOn: self.$settings.internetCallSucceeded, label: {
-                Text("API Call Succeeded")
+                Text("Server Responding")
             }).padding()
-           // Text("Hello World!" + "\(self.$settings.errorLoading)")
         }
     }
 }

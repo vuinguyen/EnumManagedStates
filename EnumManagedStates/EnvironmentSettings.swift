@@ -10,9 +10,9 @@ import SwiftUI
 import Combine
 
 enum DataLoadingState: String {
-    case initial    // maybe initial
+    case initial    
     case offline
-    case online // ? necessary
+    //case online // ? necessary
     case loading
     case error
     case success
@@ -20,7 +20,6 @@ enum DataLoadingState: String {
 
 class EnvironmentSettings: ObservableObject {
     @Published var state: DataLoadingState = .initial
-    @Published var inputState: DataLoadingState = .initial
     @Published var internetConnected = true
     @Published var internetCallSucceeded = true
 
@@ -32,20 +31,22 @@ class EnvironmentSettings: ObservableObject {
             if internetConnected == false {
                 state = DataLoadingState.offline
             } else {
-                state = DataLoadingState.online
+            //    outputState = DataLoadingState.online
             }
         case DataLoadingState.offline:
             if internetConnected {
-                state = DataLoadingState.online
+          //      outputState = DataLoadingState.online
             } else {
                 state = DataLoadingState.offline
             }
+            /*
         case DataLoadingState.online:
             if internetConnected == false {
-                state = DataLoadingState.offline
+                outputState = DataLoadingState.offline
             } else {
-                state = DataLoadingState.loading
+                outputState = DataLoadingState.loading
             }
+ */
         case DataLoadingState.loading:
             if internetConnected == false {
                 state = DataLoadingState.offline

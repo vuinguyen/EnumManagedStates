@@ -101,14 +101,14 @@
 		524784A62561CC69008E2560 /* EnumManagedStates */ = {
 			isa = PBXGroup;
 			children = (
-				52D00F0925732A75009FA09B /* MyNetworkClass.swift */,
 				524784A72561CC69008E2560 /* EnumManagedStatesApp.swift */,
 				524784A92561CC69008E2560 /* ContentView.swift */,
+				52D00EEF2571AB52009FA09B /* EnvironmentView.swift */,
 				524784AB2561CC69008E2560 /* Assets.xcassets */,
 				524784B02561CC69008E2560 /* Info.plist */,
 				524784AD2561CC69008E2560 /* Preview Content */,
 				52890D38256AE1DA00ED6B61 /* EnvironmentSettings.swift */,
-				52D00EEF2571AB52009FA09B /* EnvironmentView.swift */,
+				52D00F0925732A75009FA09B /* MyNetworkClass.swift */,
 			);
 			path = EnumManagedStates;
 			sourceTree = "<group>";
