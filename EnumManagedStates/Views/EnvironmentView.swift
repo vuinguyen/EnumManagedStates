@@ -12,11 +12,19 @@ struct EnvironmentView: View {
 
     var body: some View {
         VStack {
-            Toggle(isOn: self.$settings.internetConnected, label: {
+
+            Toggle(isOn: self.$settings.usingStates,
+                label: {
+                Text("Using States")
+            })
+            .padding()
+            Toggle(isOn: self.$settings.internetConnected,
+                label: {
                 Text("Internet Connected")
             })
             .padding()
-            Toggle(isOn: self.$settings.internetCallSucceeded, label: {
+            Toggle(isOn: self.$settings.internetCallSucceeded,
+                label: {
                 Text("Server Responding")
             })
             .padding()
