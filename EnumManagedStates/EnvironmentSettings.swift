@@ -45,8 +45,10 @@ class EnvironmentSettings: ObservableObject {
     @Published var state: DataLoadingState = .initial
     @Published var internetConnected = true
     @Published var internetCallSucceeded = true
+    @Published var imageName = ""
 
     let network = MyNetworkClass.shared
+    let noImage = ""
 
     func changeState() {
         switch state {
@@ -89,10 +91,12 @@ class EnvironmentSettings: ObservableObject {
 
     func startOver() {
         state = .initial
+        setImage(imageName: noImage)
     }
 
     func makeNetworkCall() {
         state = .loading
+        setImage(imageName: noImage)
 
         network.getTheThing(internetConnected: internetConnected, internetCallSucceeded: internetCallSucceeded) { [weak self] (result) in
             self?.handleResult(result)
@@ -100,11 +104,18 @@ class EnvironmentSettings: ObservableObject {
 
     }
 
+    private func setImage(imageName: String) {
+        self.imageName = imageName
+    }
+
     private func handleResult(_ result: MyNetworkClass.ThingResult) {
         switch result {
         case .success(let thing):
             //state = DataLoadingState.success
             state = .success(thing)
+            //state = .success
+            // display stuff
+            setImage(imageName: thing.name)
         case .failure(let error):
             if error.domain == NSURLErrorDomain,
                error.code == NSURLErrorNotConnectedToInternet {

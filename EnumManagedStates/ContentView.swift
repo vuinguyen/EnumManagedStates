@@ -11,13 +11,19 @@ struct ContentView: View {
     @EnvironmentObject var settings : EnvironmentSettings
 
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
+            EnvironmentView()
             Button(action: {
                 self.settings.startOver()
             }) {
                 Text("Start Over")
             }
-            EnvironmentView()
+            .padding()
+            Button(action: {
+                self.settings.makeNetworkCall()
+            }) {
+                Text("Download Data")
+            }
             Text("State:")
                 .padding()
                 .font(.largeTitle)
@@ -26,10 +32,10 @@ struct ContentView: View {
                 .foregroundColor(Color.purple)
                 .padding()
                 .font(.title)
-            Button(action: {
-                self.settings.makeNetworkCall()
-            }) {
-                Text("Download Data")
+            if self.settings.imageName != self.settings.noImage {
+                Image("\(self.settings.imageName)")
+                .resizable()
+                .frame(width: /*@START_MENU_TOKEN@*/200.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/160.0/*@END_MENU_TOKEN@*/)
             }
         }
     }
