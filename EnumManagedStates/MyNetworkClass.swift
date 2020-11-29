@@ -18,8 +18,6 @@ class MyNetworkClass {
 
     typealias ThingResult = Result<TheThing, NSError>
 
-    //static var theThing: TheThing?
-
     private var timer: Timer?
 
     func getTheThing(internetConnected: Bool, internetCallSucceeded: Bool, completion: @escaping (ThingResult) -> Void) {
@@ -47,6 +45,29 @@ class MyNetworkClass {
         }
     }
 
+    func getTheThingTheHardWay(internetConnected: Bool, internetCallSucceeded: Bool, completion: @escaping (TheThing?, NSError?) -> Void) {
+        timer?.invalidate()
+        timer = nil
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [weak self] (_) in
+            if internetConnected == false {
+                let error = NSError(domain: NSURLErrorDomain,
+                                    code: NSURLErrorNotConnectedToInternet,
+                                    userInfo: nil)
+                completion(nil, error)
+                return
+            } else if internetCallSucceeded == false {
+                let error = NSError(domain: NSURLErrorDomain,
+                                    code: 500,
+                                    userInfo: nil)
+                completion(nil, error)
+            } else {
+                let thing = TheThing(name: "HappyCrab")
+                completion(thing, nil)
+            }
+        }
+    }
+
 }
 
- 
+

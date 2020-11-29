@@ -14,10 +14,12 @@ struct EnvironmentView: View {
         VStack {
             Toggle(isOn: self.$settings.internetConnected, label: {
                 Text("Internet Connected")
-            }).padding()
+            })
+            .padding()
             Toggle(isOn: self.$settings.internetCallSucceeded, label: {
                 Text("Server Responding")
-            }).padding()
+            })
+            .padding()
         }
     }
 }

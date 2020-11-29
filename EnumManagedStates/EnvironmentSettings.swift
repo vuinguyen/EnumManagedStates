@@ -1,5 +1,5 @@
 //
-//  DataLoadingState.swift
+//  EnvironmentSettings.swift
 //  EnumManagedStates
 //
 //  Created by Vui Nguyen on 11/22/20.
@@ -17,6 +17,8 @@ enum DataLoadingState: printEnum {
 
     var description: String {
         switch self {
+        case .none:
+            return "No State"
         case .initial:
             return "Initial"
         case .offline:
@@ -30,6 +32,7 @@ enum DataLoadingState: printEnum {
         }
     }
 
+    case none
     case initial    
     case offline
     //case online // ? necessary
@@ -50,6 +53,13 @@ class EnvironmentSettings: ObservableObject {
     let network = MyNetworkClass.shared
     let noImage = ""
 
+    // Oh so many flags!!!
+
+    private func setImage(imageName: String) {
+        self.imageName = imageName
+    }
+
+    /*
     func changeState() {
         switch state {
         case DataLoadingState.initial:
@@ -88,7 +98,7 @@ class EnvironmentSettings: ObservableObject {
             state = DataLoadingState.initial
         }
     }
-
+*/
     func startOver() {
         state = .initial
         setImage(imageName: noImage)
@@ -104,17 +114,11 @@ class EnvironmentSettings: ObservableObject {
 
     }
 
-    private func setImage(imageName: String) {
-        self.imageName = imageName
-    }
-
     private func handleResult(_ result: MyNetworkClass.ThingResult) {
         switch result {
         case .success(let thing):
-            //state = DataLoadingState.success
             state = .success(thing)
-            //state = .success
-            // display stuff
+            // display downloaded thing
             setImage(imageName: thing.name)
         case .failure(let error):
             if error.domain == NSURLErrorDomain,
@@ -126,10 +130,44 @@ class EnvironmentSettings: ObservableObject {
             }
         }
     }
+
+    func makeNetworkCallBooleans() {
+        state = .none    // we're not using states
+        setImage(imageName: noImage)
+        network.getTheThingTheHardWay(internetConnected: internetConnected, internetCallSucceeded: internetCallSucceeded) { [weak self] (thing, error) in
+            self?.handleResultBooleans(thing: thing, error: error)
+        }
+    }
+
+    private func handleResultBooleans(thing: TheThing?, error: NSError?) {
+        guard error == nil else {
+            if let domain = error?.domain,
+               let code = error?.code {
+                if domain == NSURLErrorDomain,
+                   code == NSURLErrorNotConnectedToInternet {
+                    print("Internet is Offline! Connect to internet")
+                } else {
+                    print("Server error!")
+                }
+            }
+            return
+        }
+
+        if thing == nil {
+            return
+        }
+
+        if let imageName = thing?.name {
+            setImage(imageName: imageName)
+        }
+    }
+
 }
 
+/*
 struct EnvironmentSettings_Previews: PreviewProvider {
     static var previews: some View {
         /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }
+ */
