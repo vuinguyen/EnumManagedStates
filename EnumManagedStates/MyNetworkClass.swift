@@ -24,7 +24,7 @@ class MyNetworkClass {
         timer?.invalidate()
         timer = nil
 
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [weak self] (_) in
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (_) in
             if internetConnected == false {
                 let error = NSError(domain: NSURLErrorDomain,
                                     code: NSURLErrorNotConnectedToInternet,
@@ -49,7 +49,7 @@ class MyNetworkClass {
         timer?.invalidate()
         timer = nil
         
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [weak self] (_) in
+        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (_) in
             if internetConnected == false {
                 let error = NSError(domain: NSURLErrorDomain,
                                     code: NSURLErrorNotConnectedToInternet,

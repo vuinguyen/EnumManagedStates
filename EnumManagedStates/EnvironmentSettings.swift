@@ -17,8 +17,6 @@ enum DataLoadingState: printEnum {
 
     var description: String {
         switch self {
-        //   case .none:
-        //       return "No State"
         case .initial:
             return "Initial"
         case .offline:
@@ -32,13 +30,10 @@ enum DataLoadingState: printEnum {
         }
     }
 
-    //case none
     case initial    
     case offline
-    //case online // ? necessary
     case loading
     case error
-    //case success
     case success(TheThing)
 }
 
@@ -56,52 +51,10 @@ class EnvironmentSettings: ObservableObject {
     let noImage = ""
     let noMessages = ""
 
-    // Oh so many flags!!!
-
     private func setImage(imageName: String) {
         self.imageName = imageName
     }
 
-    /*
-     func changeState() {
-     switch state {
-     case DataLoadingState.initial:
-     if internetConnected == false {
-     state = DataLoadingState.offline
-     } else {
-     //    outputState = DataLoadingState.online
-     }
-     case DataLoadingState.offline:
-     if internetConnected {
-     //      outputState = DataLoadingState.online
-     } else {
-     state = DataLoadingState.offline
-     }
-     /*
-     case DataLoadingState.online:
-     if internetConnected == false {
-     outputState = DataLoadingState.offline
-     } else {
-     outputState = DataLoadingState.loading
-     }
-     */
-     case DataLoadingState.loading:
-     if internetConnected == false {
-     state = DataLoadingState.offline
-     return
-     }
-     if internetCallSucceeded == false {
-     state = DataLoadingState.error
-     } else {
-     //               state = DataLoadingState.success
-     }
-     case DataLoadingState.error:
-     state = DataLoadingState.loading
-     case DataLoadingState.success:
-     state = DataLoadingState.initial
-     }
-     }
-     */
     func startOver() {
         state = .initial
         booleanFlagMessages = noMessages
@@ -136,7 +89,7 @@ class EnvironmentSettings: ObservableObject {
     }
 
     func makeNetworkCallBooleans() {
-        booleanFlagMessages = "Downloading..."
+        booleanFlagMessages = "Downloading. Checking flags:\ndata,error,error domain,\nerror code,data name"
         setImage(imageName: noImage)
         network.getTheThingTheHardWay(internetConnected: internetConnected, internetCallSucceeded: internetCallSucceeded) { [weak self] (thing, error) in
             self?.handleResultBooleans(thing: thing, error: error)
@@ -149,7 +102,7 @@ class EnvironmentSettings: ObservableObject {
                let code = error?.code {
                 if domain == NSURLErrorDomain,
                    code == NSURLErrorNotConnectedToInternet {
-                    booleanFlagMessages = "Internet is Offline! Connect to internet"
+                    booleanFlagMessages = "Internet is Offline!\nConnect to internet"
                 } else {
                     booleanFlagMessages = "Server error!"
                 }

@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct ImageDisplayView: View {
-    //@State var display = true
     @EnvironmentObject var settings : EnvironmentSettings
-
 
     var body: some View {
         VStack {
@@ -21,9 +19,8 @@ struct ImageDisplayView: View {
             }
         }
         .fixedSize()
-        .frame(width: 150, height: 120, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+        .frame(width: 150, height: 120, alignment: .center)
     }
-
 
 }
 

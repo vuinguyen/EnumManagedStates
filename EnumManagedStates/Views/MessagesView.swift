@@ -16,8 +16,6 @@ struct MessagesView: View {
                 Text("State:")
                     .padding()
                     .font(.largeTitle)
-
-                //Text("\(self.settings.state.rawValue)")
                 Text("\(self.settings.state.description)")
                     .foregroundColor(Color.purple)
                     .padding()
@@ -25,13 +23,13 @@ struct MessagesView: View {
             } else {
                 Text("Messages:")
                     .padding()
-                    .font(.largeTitle)
+                    .font(.title2)
                 Text("\(self.settings.booleanFlagMessages)")
                     .foregroundColor(Color.purple)
-                    .padding()
-                    .font(.body)
-                    .lineLimit(0)
-
+                    .font(.callout)
+                    .lineLimit(3)
+                    .multilineTextAlignment(.center)
+                    .frame(width: 250)
             }
         }
     }
