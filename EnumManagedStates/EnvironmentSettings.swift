@@ -89,7 +89,7 @@ class EnvironmentSettings: ObservableObject {
     }
 
     func makeNetworkCallBooleans() {
-        booleanFlagMessages = "Downloading. Checking flags:\ndata,error,error domain,\nerror code,data name"
+        booleanFlagMessages = "Downloading. Checking flags:\nonline,server up,\ndata,error,error domain,\nerror code,data name"
         setImage(imageName: noImage)
         network.getTheThingTheHardWay(internetConnected: internetConnected, internetCallSucceeded: internetCallSucceeded) { [weak self] (thing, error) in
             self?.handleResultBooleans(thing: thing, error: error)

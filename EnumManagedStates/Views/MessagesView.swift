@@ -27,8 +27,9 @@ struct MessagesView: View {
                 Text("\(self.settings.booleanFlagMessages)")
                     .foregroundColor(Color.purple)
                     .font(.callout)
-                    .lineLimit(3)
+                    .lineLimit(4)
                     .multilineTextAlignment(.center)
+                    .allowsTightening(true)
                     .frame(width: 250)
             }
         }
