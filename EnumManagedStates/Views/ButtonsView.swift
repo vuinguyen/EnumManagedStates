@@ -19,9 +19,10 @@ struct ButtonsView: View {
             }
             .padding()
             Button(action: {
-                if self.settings.usingStates { self.settings.makeNetworkCall()
+                if self.settings.usingStates {
+                    self.settings.makeNetworkCall()
                 } else {
-                    self.settings.makeNetworkCallBooleans()
+                    self.settings.makeNetworkCallUsingBooleans()
                 }
             }) {
                 Text("Download Data")

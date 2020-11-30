@@ -71,6 +71,14 @@ class EnvironmentSettings: ObservableObject {
 
     }
 
+    func makeNetworkCallUsingBooleans() {
+        booleanFlagMessages = "Downloading. Checking flags:\nonline,server up,\ndata,error,error domain,\nerror code,data name"
+        setImage(imageName: noImage)
+        network.getTheThingTheHardWay(internetConnected: internetConnected, internetCallSucceeded: internetCallSucceeded) { [weak self] (thing, error) in
+            self?.handleResultUsingBooleans(thing: thing, error: error)
+        }
+    }
+
     private func handleResult(_ result: MyNetworkClass.ThingResult) {
         switch result {
         case .success(let thing):
@@ -87,16 +95,8 @@ class EnvironmentSettings: ObservableObject {
             }
         }
     }
-
-    func makeNetworkCallBooleans() {
-        booleanFlagMessages = "Downloading. Checking flags:\nonline,server up,\ndata,error,error domain,\nerror code,data name"
-        setImage(imageName: noImage)
-        network.getTheThingTheHardWay(internetConnected: internetConnected, internetCallSucceeded: internetCallSucceeded) { [weak self] (thing, error) in
-            self?.handleResultBooleans(thing: thing, error: error)
-        }
-    }
-
-    private func handleResultBooleans(thing: TheThing?, error: NSError?) {
+    
+    private func handleResultUsingBooleans(thing: TheThing?, error: NSError?) {
         guard error == nil else {
             if let domain = error?.domain,
                let code = error?.code {
