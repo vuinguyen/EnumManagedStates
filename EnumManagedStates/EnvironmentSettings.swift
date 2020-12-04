@@ -58,15 +58,15 @@ class EnvironmentSettings: ObservableObject {
         setImage(imageName: noImage)
     }
 
-    func makeNetworkCallBooleans() {
+    func makeNetworkCallUsingBooleans() {
         booleanFlagMessages = "Downloading. Checking flags:\nonline,server up,\ndata,error,error domain,\nerror code,data name"
         setImage(imageName: noImage)
         network.getTheThingTheHardWay(internetConnected: internetConnected, internetCallSucceeded: internetCallSucceeded) { [weak self] (thing, error) in
-            self?.handleResultBooleans(thing: thing, error: error)
+            self?.handleResultUsingBooleans(thing: thing, error: error)
         }
     }
 
-    private func handleResultBooleans(thing: TheThing?, error: NSError?) {
+    private func handleResultUsingBooleans(thing: TheThing?, error: NSError?) {
         guard error == nil else {
             if let domain = error?.domain,
                let code = error?.code {
