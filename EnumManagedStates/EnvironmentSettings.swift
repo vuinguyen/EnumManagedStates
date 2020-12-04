@@ -14,6 +14,11 @@ protocol printEnum {
 }
 
 enum DataLoadingState: printEnum {
+    case initial
+    case offline
+    case loading
+    case error
+    case success(TheThing)
 
     var description: String {
         switch self {
@@ -29,27 +34,19 @@ enum DataLoadingState: printEnum {
             return "Success: \(thing.name)"
         }
     }
-
-    case initial    
-    case offline
-    case loading
-    case error
-    case success(TheThing)
 }
 
-
-
 class EnvironmentSettings: ObservableObject {
-    @Published var usingStates = true
+    @Published var usingStates = false
     @Published var state: DataLoadingState = .initial
-    @Published var booleanFlagMessages = ""
     @Published var internetConnected = true
     @Published var internetCallSucceeded = true
+    @Published var booleanFlagMessages = ""
     @Published var imageName = ""
 
     let network = MyNetworkClass.shared
-    let noImage = ""
     let noMessages = ""
+    let noImage = ""
 
     private func setImage(imageName: String) {
         self.imageName = imageName
@@ -59,33 +56,6 @@ class EnvironmentSettings: ObservableObject {
         state = .initial
         booleanFlagMessages = noMessages
         setImage(imageName: noImage)
-    }
-
-    func makeNetworkCall() {
-        state = .loading
-        setImage(imageName: noImage)
-
-        network.getTheThing(internetConnected: internetConnected, internetCallSucceeded: internetCallSucceeded) { [weak self] (result) in
-            self?.handleResult(result)
-        }
-
-    }
-
-    private func handleResult(_ result: MyNetworkClass.ThingResult) {
-        switch result {
-        case .success(let thing):
-            state = .success(thing)
-            // display downloaded thing
-            setImage(imageName: thing.name)
-        case .failure(let error):
-            if error.domain == NSURLErrorDomain,
-               error.code == NSURLErrorNotConnectedToInternet {
-                state = .offline
-            }
-            else {
-                state = .error
-            }
-        }
     }
 
     func makeNetworkCallBooleans() {
@@ -119,5 +89,31 @@ class EnvironmentSettings: ObservableObject {
             booleanFlagMessages = "Image Displayed"
         }
     }
+    
+    func makeNetworkCall() {
+        state = .loading
+        setImage(imageName: noImage)
 
+        network.getTheThing(internetConnected: internetConnected, internetCallSucceeded: internetCallSucceeded) { [weak self] (result) in
+            self?.handleResult(result)
+        }
+
+    }
+
+    private func handleResult(_ result: MyNetworkClass.ThingResult) {
+        switch result {
+        case .success(let thing):
+            state = .success(thing)
+            // display downloaded thing
+            setImage(imageName: thing.name)
+        case .failure(let error):
+            if error.domain == NSURLErrorDomain,
+               error.code == NSURLErrorNotConnectedToInternet {
+                state = .offline
+            }
+            else {
+                state = .error
+            }
+        }
+    }
 }

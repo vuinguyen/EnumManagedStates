@@ -17,7 +17,6 @@ struct ContentView: View {
             MessagesView()
             ImageDisplayView()
         }
-
     }
 }
 

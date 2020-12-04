@@ -38,6 +38,7 @@ struct MessagesView: View {
 
 struct MessagesView_Previews: PreviewProvider {
     static var previews: some View {
-        MessagesView().environmentObject(EnvironmentSettings())
+        MessagesView()
+            .environmentObject(EnvironmentSettings())
     }
 }
