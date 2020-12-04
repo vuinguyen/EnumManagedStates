@@ -12,7 +12,6 @@ struct EnvironmentView: View {
 
     var body: some View {
         VStack {
-
             Toggle(isOn: self.$settings.usingStates,
                 label: {
                 Text("Using States")

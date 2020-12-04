@@ -69,11 +69,9 @@ class EnvironmentSettings: ObservableObject {
     func makeNetworkCall() {
         state = .loading
         setImage(imageName: noImage)
-
         network.getTheThing(internetConnected: internetConnected, internetCallSucceeded: internetCallSucceeded) { [weak self] (result) in
             self?.handleResult(result)
         }
-
     }
 
     private func handleResultUsingBooleans(thing: TheThing?, error: NSError?) {
