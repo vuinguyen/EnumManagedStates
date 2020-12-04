@@ -66,6 +66,16 @@ class EnvironmentSettings: ObservableObject {
         }
     }
 
+    func makeNetworkCall() {
+        state = .loading
+        setImage(imageName: noImage)
+
+        network.getTheThing(internetConnected: internetConnected, internetCallSucceeded: internetCallSucceeded) { [weak self] (result) in
+            self?.handleResult(result)
+        }
+
+    }
+
     private func handleResultUsingBooleans(thing: TheThing?, error: NSError?) {
         guard error == nil else {
             if let domain = error?.domain,
@@ -88,16 +98,6 @@ class EnvironmentSettings: ObservableObject {
             setImage(imageName: imageName)
             booleanFlagMessages = "Image Displayed"
         }
-    }
-    
-    func makeNetworkCall() {
-        state = .loading
-        setImage(imageName: noImage)
-
-        network.getTheThing(internetConnected: internetConnected, internetCallSucceeded: internetCallSucceeded) { [weak self] (result) in
-            self?.handleResult(result)
-        }
-
     }
 
     private func handleResult(_ result: MyNetworkClass.ThingResult) {
